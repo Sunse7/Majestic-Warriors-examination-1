@@ -18,6 +18,7 @@ let words = ['dog', 'cat', 'raccoon'];
 let randomWord = words[Math.floor(Math.random() * words.length)];
 console.log(randomWord, 'random');
 
+let noMatchWord = document.createElement('li');
 //lägger upp tomma rutor
 const wordEl = document.querySelector('.word')
 for(let i = 0; i<randomWord.length; i++){
@@ -30,15 +31,14 @@ let userTries = 0;
 let keypressed;
 
 
-
 document.onkeydown = function (e) {
     keypressed = e.key;
-    console.log(keypressed, 'hej');
 
     if (randomWord.includes(keypressed)) {
         console.log(`The word contained ${keypressed}`);
-        guessedLetters.unshift(keypressed);
-        letters.splice();
+        console.log(letters.indexOf(keypressed), 'index');
+        
+        letters.splice(letters.indexOf(keypressed), 1);
 
         //skriver bokstäverna i rutorna
         for (let i = 0; i < wordEl.children.length; i++) {
@@ -47,11 +47,12 @@ document.onkeydown = function (e) {
             }
         }
     }
-    else if (!randomWord.includes(keypressed)) {
+    else if (!randomWord.includes(keypressed) && letters.includes(keypressed)) {
         nrOfTries--;
         guessedLetters.unshift(keypressed);
-        letters.splice();
-        let noMatchWord = document.createElement('li');
+
+        letters.splice(letters.indexOf(keypressed), 1);
+        
         noMatchWord.innerHTML = `${guessedLetters[0]}`;
         document.querySelector('.nomatch').appendChild(noMatchWord);
         console.log(nrOfTries, 'nrOfTries');

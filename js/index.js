@@ -30,10 +30,12 @@ document.onkeydown = function (e) {
     if (randomWord.includes(keypressed)) {
         console.log(`The word contained ${keypressed}`);
         guessedLetters.push(keypressed);
+        letters.splice();
     }
     else {
         nrOfTries--;
         guessedLetters.push(keypressed);
+        letters.splice();
         console.log(nrOfTries, 'nrOfTries');
     }
 };

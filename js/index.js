@@ -32,45 +32,30 @@ let keypressed;
 
 
 document.onkeydown = function (e) {
- keypressed = e.key;
- console.log(keypressed, 'hej');
+    keypressed = e.key;
+    console.log(keypressed, 'hej');
 
- if (randomWord.includes(keypressed)) {
-     console.log(`The word contained ${keypressed}`);
-     guessedLetters.unshift(keypressed);
-     letters.splice();
+    if (randomWord.includes(keypressed)) {
+        console.log(`The word contained ${keypressed}`);
+        guessedLetters.unshift(keypressed);
+        letters.splice();
 
-//        guessedLetters.forEach(letter => {
-//            let el1 = document.createElement('li');
-//            el1.innerHTML = `${guessedLetters[0]}`;
-//            document.querySelector('.word').appendChild(el1);
-//        });
-
-//        for(let i = 0; i<randomWord.length; i++){
-//            if(randomWord[i] == keypressed){
-//                let el1 = document.createElement('li');
-//                el1.innerHTML = `${keypressed}`;
-//                document.querySelector('.word').insertBefore(el1, document.querySelector('.word').children[randomWord.indexOf(keypressed)])
-//            }
-//        }
-
-
-//skriver bokstäverna i rutorna
-             for(let i = 0; i<wordEl.children.length; i++){
-                 if(randomWord[i]==keypressed){
-                     wordEl.children[i].innerHTML = keypressed
-                 }
-             }
-
- }
- else {
-     nrOfTries--;
-     guessedLetters.push(keypressed);
-     letters.splice();
-     el1.innerHTML = `${guessedLetters[0]}`;
-     document.querySelector('.nomatch').appendChild(el1);
-     document.querySelector('figure').classList.add('scaffold');
-     console.log(nrOfTries, 'nrOfTries');
- }
+        //skriver bokstäverna i rutorna
+        for (let i = 0; i < wordEl.children.length; i++) {
+            if (randomWord[i] == keypressed) {
+                wordEl.children[i].innerHTML = keypressed
+            }
+        }
+    }
+    else {
+        nrOfTries--;
+        guessedLetters.unshift(keypressed);
+        letters.splice();
+        let noMatchWord = document.createElement('li');
+        noMatchWord.innerHTML = `${guessedLetters[0]}`;
+        document.querySelector('.nomatch').appendChild(noMatchWord);
+        document.querySelector('figure').classList.add('scaffold');
+        console.log(nrOfTries, 'nrOfTries');
+    }
 };
 

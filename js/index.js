@@ -18,6 +18,7 @@ let words = ['dog', 'cat', 'raccoon'];
 let randomWord = words[Math.floor(Math.random() * words.length)];
 console.log(randomWord, 'random');
 
+//lägger upp tomma rutor
 const wordEl = document.querySelector('.word')
 for(let i = 0; i<randomWord.length; i++){
  let emptyLetter = document.createElement('li');
@@ -53,6 +54,8 @@ document.onkeydown = function (e) {
 //            }
 //        }
 
+
+//skriver bokstäverna i rutorna
              for(let i = 0; i<wordEl.children.length; i++){
                  if(randomWord[i]==keypressed){
                      wordEl.children[i].innerHTML = keypressed

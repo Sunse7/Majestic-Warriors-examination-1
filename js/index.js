@@ -33,11 +33,19 @@ document.onkeydown = function (e) {
         guessedLetters.unshift(keypressed);
         letters.splice();
 
-        guessedLetters.forEach(letter => {
-            let el1 = document.createElement('li');
-            el1.innerHTML = `${guessedLetters[0]}`;
-            document.querySelector('.word').appendChild(el1);
-        });
+//        guessedLetters.forEach(letter => {
+//            let el1 = document.createElement('li');
+//            el1.innerHTML = `${guessedLetters[0]}`;
+//            document.querySelector('.word').appendChild(el1);
+//        });
+
+        for(let i = 0; i<randomWord.length; i++){
+            if(randomWord[i] == keypressed){
+                let el1 = document.createElement('li');
+                el1.innerHTML = `${keypressed}`;
+                document.querySelector('.word').insertBefore(el1, document.querySelector('.word').children[randomWord.indexOf(keypressed)])
+            }
+        }
 
     }
     else {
@@ -50,7 +58,4 @@ document.onkeydown = function (e) {
         console.log(nrOfTries, 'nrOfTries');
     }
 };
-
-
-
 

@@ -47,15 +47,28 @@ document.onkeydown = function (e) {
             }
         }
     }
-    else {
+    else if (!randomWord.includes(keypressed)) {
         nrOfTries--;
         guessedLetters.unshift(keypressed);
         letters.splice();
         let noMatchWord = document.createElement('li');
         noMatchWord.innerHTML = `${guessedLetters[0]}`;
         document.querySelector('.nomatch').appendChild(noMatchWord);
-        document.querySelector('figure').classList.add('scaffold');
         console.log(nrOfTries, 'nrOfTries');
+        document.querySelector('figure').classList.add('scaffold');
+
+        if (nrOfTries === 3) {
+            document.querySelector('figure').classList.add('head');
+        }
+        else if (nrOfTries === 2) {
+            document.querySelector('figure').classList.add('body');
+        }
+        else if (nrOfTries === 1) {
+            document.querySelector('figure').classList.add('arms');
+        }
+        else if (nrOfTries === 0) {
+            document.querySelector('figure').classList.add('legs');
+        }
     }
 };
 

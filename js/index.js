@@ -37,6 +37,16 @@ const lowDiff = document.querySelector('.short')
 const highDiff = document.querySelector('.long')
 
 lowDiff.addEventListener('click', function(){
+    letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+    guessedLetters = []
+    document.querySelector('figure').classList.remove('scaffold')
+    document.querySelector('figure').classList.remove('head')
+    document.querySelector('figure').classList.remove('body')
+    document.querySelector('figure').classList.remove('arms')
+    document.querySelector('figure').classList.remove('legs')
+    document.querySelector('.nomatch').innerHTML = ''
+    nrOfTries = 5;
+    userTries = 0;
     while(randomWord.length>4){
         randomWord = words[Math.floor(Math.random() * words.length)];
         console.log(randomWord)
@@ -45,6 +55,16 @@ lowDiff.addEventListener('click', function(){
 })
 
 highDiff.addEventListener('click', function(){
+    letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+    guessedLetters = []
+    document.querySelector('figure').classList.remove('scaffold')
+    document.querySelector('figure').classList.remove('head')
+    document.querySelector('figure').classList.remove('body')
+    document.querySelector('figure').classList.remove('arms')
+    document.querySelector('figure').classList.remove('legs')
+    document.querySelector('.nomatch').innerHTML = ''
+    nrOfTries = 5;
+    userTries = 0;
     while(randomWord.length<5){
         randomWord = words[Math.floor(Math.random() * words.length)];
         console.log(randomWord)
@@ -101,6 +121,7 @@ document.onkeydown = function (e) {
         else if (nrOfTries === 0) {
             document.querySelector('figure').classList.add('legs');
             document.querySelector('.game-over').classList.add('show');
+            document.querySelector('b').innerHTML = randomWord
             let restartBtn = document.querySelector('a');
             restartBtn.addEventListener('click', () => {
                 location.reload();

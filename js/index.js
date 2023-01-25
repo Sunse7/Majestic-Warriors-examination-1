@@ -15,9 +15,6 @@ let guessedLetters = [];
 
 let words = ['dog', 'cat', 'raccoon', 'rabbit', 'mouse', 'horse', 'donkey', 'squirrel', 'bird', 'wolf', 'fox', 'lynx', 'bear', 'moose', 'deer', 'lion', 'tiger', 'puma'];
 
-
-
-
 let randomWord = words[Math.floor(Math.random() * words.length)];
 console.log(randomWord, 'random');
 
@@ -88,11 +85,18 @@ function combineLetters() {
       comparedWord += listItems[i].innerHTML;
     }
     if (comparedWord == randomWord) {
-        let win = document.querySelector('main p');
-        win.innerHTML = 'You won!';
+        let winView = document.querySelector('section h1');
+        let winViewText = document.querySelector('section p');
+        winView.innerHTML = 'You Won!';
+        winViewText.innerHTML = '';
+        document.querySelector('.game-over').classList.add('show');
     }
   }
   
+  let restartBtn = document.querySelector('a');
+  restartBtn.addEventListener('click', () => {
+      location.reload();
+  });
 
 document.onkeydown = function (e) {
     keypressed = e.key;
@@ -132,10 +136,7 @@ document.onkeydown = function (e) {
             document.querySelector('figure').classList.add('legs');
             document.querySelector('.game-over').classList.add('show');
             document.querySelector('b').innerHTML = randomWord
-            let restartBtn = document.querySelector('a');
-            restartBtn.addEventListener('click', () => {
-                location.reload();
-            })
+           
         }
     }
 };

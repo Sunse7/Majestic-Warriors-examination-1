@@ -15,16 +15,53 @@ let guessedLetters = [];
 
 let words = ['dog', 'cat', 'raccoon'];
 
+
+
+
+//valbar svårighetsgrad
+
+let chosenDifficulty
+const lowDiff = document.querySelector('.short')
+const mediumDiff = document.querySelector('.medium')
+const highDiff = document.querySelector('.long')
+
+
+
 let randomWord = words[Math.floor(Math.random() * words.length)];
 console.log(randomWord, 'random');
 
-let noMatchWord = document.createElement('li');
 //lägger upp tomma rutor
 const wordEl = document.querySelector('.word')
-for(let i = 0; i<randomWord.length; i++){
- let emptyLetter = document.createElement('li');
- wordEl.appendChild(emptyLetter)
+function setWordBoxes(){
+    wordEl.innerHTML = ''
+    for(let i = 0; i<randomWord.length; i++){
+        let emptyLetter = document.createElement('li');
+        wordEl.appendChild(emptyLetter)
+    }
 }
+setWordBoxes()
+
+
+
+lowDiff.addEventListener('click', function(){
+    while(randomWord.length>4){
+        randomWord = words[Math.floor(Math.random() * words.length)];
+        console.log(randomWord)
+        setWordBoxes()
+    }
+})
+
+highDiff.addEventListener('click', function(){
+    while(randomWord.length<5){
+        randomWord = words[Math.floor(Math.random() * words.length)];
+        console.log(randomWord)
+        setWordBoxes()
+    }
+})
+
+
+let noMatchWord = document.createElement('li');
+
 
 let nrOfTries = 5;
 let userTries = 0;

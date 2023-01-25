@@ -8,6 +8,16 @@ body {
     background: #eee;
 }
 
+.difficulty {
+    position: fixed;
+    left: 20px;
+    top: 20px;
+}
+
+button {
+    
+}
+
 main {
     max-width: 520px;
     width: 100%;

@@ -18,7 +18,6 @@ let words = ['dog', 'cat', 'raccoon'];
 let randomWord = words[Math.floor(Math.random() * words.length)];
 console.log(randomWord, 'random');
 
-let noMatchWord = document.createElement('li');
 //lägger upp tomma rutor
 const wordEl = document.querySelector('.word')
 for(let i = 0; i<randomWord.length; i++){
@@ -52,7 +51,8 @@ document.onkeydown = function (e) {
         guessedLetters.unshift(keypressed);
 
         letters.splice(letters.indexOf(keypressed), 1);
-        
+
+        let noMatchWord = document.createElement('li');
         noMatchWord.innerHTML = `${guessedLetters[0]}`;
         document.querySelector('.nomatch').appendChild(noMatchWord);
         console.log(nrOfTries, 'nrOfTries');
@@ -69,6 +69,11 @@ document.onkeydown = function (e) {
         }
         else if (nrOfTries === 0) {
             document.querySelector('figure').classList.add('legs');
+            document.querySelector('.game-over').classList.add('show');
+            let restartBtn = document.querySelector('a');
+            restartBtn.addEventListener('click', () => {
+                location.reload();
+            })
         }
     }
 };

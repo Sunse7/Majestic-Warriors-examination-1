@@ -13,7 +13,7 @@
 
 let guessedLetters = [];
 
-let words = ['dog', 'cat', 'raccoon'];
+let words = ['dog', 'cat', 'raccoon', 'rabbit', 'mouse', 'horse', 'donkey', 'squirrel', 'bird', 'wolf', 'fox', 'lynx', 'bear', 'moose', 'deer', 'lion', 'tiger', 'puma'];
 
 let randomWord = words[Math.floor(Math.random() * words.length)];
 console.log(randomWord, 'random');

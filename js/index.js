@@ -18,14 +18,6 @@ let words = ['dog', 'cat', 'raccoon', 'rabbit', 'mouse', 'horse', 'donkey', 'squ
 
 
 
-//valbar svårighetsgrad
-
-
-const lowDiff = document.querySelector('.short')
-const highDiff = document.querySelector('.long')
-
-
-
 let randomWord = words[Math.floor(Math.random() * words.length)];
 console.log(randomWord, 'random');
 
@@ -40,7 +32,9 @@ function setWordBoxes(){
 }
 setWordBoxes()
 
-
+//valbar svårighetsgrad
+const lowDiff = document.querySelector('.short')
+const highDiff = document.querySelector('.long')
 
 lowDiff.addEventListener('click', function(){
     while(randomWord.length>4){

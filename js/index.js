@@ -22,7 +22,6 @@ let words = ['dog', 'cat', 'raccoon', 'rabbit', 'mouse', 'horse', 'donkey', 'squ
 
 
 const lowDiff = document.querySelector('.short')
-const mediumDiff = document.querySelector('.medium')
 const highDiff = document.querySelector('.long')
 
 

@@ -81,22 +81,33 @@ let userTries = 0;
 let keypressed;
 
 
+function combineLetters() {
+    let listItems = document.querySelectorAll('.word li');
+    let comparedWord = '';
+    for (let i = 0; i < listItems.length; i++) {
+      comparedWord += listItems[i].innerHTML;
+    }
+    if (comparedWord == randomWord) {
+        let win = document.querySelector('main p');
+        win.innerHTML = 'You won!';
+    }
+  }
+  
+
 document.onkeydown = function (e) {
     keypressed = e.key;
 
-    if (randomWord.includes(keypressed)) {
-        console.log(`The word contained ${keypressed}`);
-        console.log(letters.indexOf(keypressed), 'index');
-        
+    if (randomWord.includes(keypressed)) {        
         letters.splice(letters.indexOf(keypressed), 1);
 
         //skriver bokstäverna i rutorna
         for (let i = 0; i < wordEl.children.length; i++) {
             if (randomWord[i] == keypressed) {
-                wordEl.children[i].innerHTML = keypressed
+                wordEl.children[i].innerHTML = keypressed;
+                combineLetters();
             }
         }
-    }
+    }    
     else if (!randomWord.includes(keypressed) && letters.includes(keypressed)) {
         nrOfTries--;
         guessedLetters.unshift(keypressed);
@@ -106,7 +117,6 @@ document.onkeydown = function (e) {
         let noMatchWord = document.createElement('li');
         noMatchWord.innerHTML = `${guessedLetters[0]}`;
         document.querySelector('.nomatch').appendChild(noMatchWord);
-        console.log(nrOfTries, 'nrOfTries');
         document.querySelector('figure').classList.add('scaffold');
 
         if (nrOfTries === 3) {

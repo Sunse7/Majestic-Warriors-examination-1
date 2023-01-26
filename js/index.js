@@ -39,7 +39,6 @@ function reset() {
     document.querySelector('figure').classList.remove('legs');
     document.querySelector('.nomatch').innerHTML = '';
     nrOfTries = 5;
-    randomWord = words[Math.floor(Math.random() * words.length)];
 }
 
 //lägger upp tomma rutor

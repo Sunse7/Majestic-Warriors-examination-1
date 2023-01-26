@@ -11,12 +11,15 @@
 let letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
     'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
-let guessedLetters = [];
-
 let words = ['dog', 'cat', 'raccoon', 'rabbit', 'mouse', 'horse', 'donkey', 'squirrel',
     'bird', 'wolf', 'fox', 'lynx', 'bear', 'moose', 'deer', 'lion', 'tiger', 'puma'];
 
 let randomWord = words[Math.floor(Math.random() * words.length)];
+
+let guessedLetters = [];
+let nrOfTries = 5;
+let userTries = 0;
+let keypressed;
 
 //lägger upp tomma rutor
 const wordEl = document.querySelector('.word');
@@ -47,7 +50,6 @@ lowDiff.addEventListener('click', function () {
     userTries = 0;
     while (randomWord.length > 4) {
         randomWord = words[Math.floor(Math.random() * words.length)];
-        console.log(randomWord);
         setWordBoxes();
     }
 })
@@ -66,17 +68,9 @@ highDiff.addEventListener('click', function () {
     userTries = 0;
     while (randomWord.length < 5) {
         randomWord = words[Math.floor(Math.random() * words.length)];
-        console.log(randomWord);
         setWordBoxes();
     }
 })
-
-let noMatchWord = document.createElement('li'); //Is this needed?
-
-let nrOfTries = 5;
-let userTries = 0;
-let keypressed;
-
 
 function combineLetters() {
     let listItems = document.querySelectorAll('.word li');
@@ -139,22 +133,6 @@ document.onkeydown = function (e) {
                 document.querySelector('b').innerHTML = randomWord;
                 break;
         }
-
-        // if (nrOfTries === 3) {
-        //     document.querySelector('figure').classList.add('head');
-        // }
-        // else if (nrOfTries === 2) {
-        //     document.querySelector('figure').classList.add('body');
-        // }
-        // else if (nrOfTries === 1) {
-        //     document.querySelector('figure').classList.add('arms');
-        // }
-        // else if (nrOfTries === 0) {
-        //     document.querySelector('figure').classList.add('legs');
-        //     document.querySelector('.game-over').classList.add('show');
-        //     document.querySelector('b').innerHTML = randomWord
-
-        // }
     }
 };
 

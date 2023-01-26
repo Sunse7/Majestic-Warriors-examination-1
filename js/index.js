@@ -19,6 +19,7 @@ let randomWord = words[Math.floor(Math.random() * words.length)];
 let guessedLetters = [];
 let nrOfTries = 5;
 let keypressed;
+let points = 0
 
 
 const winViewH1 = document.querySelector('section h1');
@@ -81,6 +82,8 @@ function combineLetters() {
         winViewH1.innerHTML = 'You Won!';
         winViewText.innerHTML = '';
         document.querySelector('.game-over').classList.add('show');
+        points+=100;
+        document.querySelector('aside p:first-child').innerHTML = `${points} poäng`;
     }
 }
 
@@ -133,6 +136,8 @@ document.onkeydown = function (e) {
                 document.querySelector('.game-over').classList.add('show');
                 winViewH1.innerHTML = 'Game over!';
                 winViewText.innerHTML = `The word we were looking for was <b>${randomWord}</b>.`;
+                points = 0;
+                document.querySelector('aside p:first-child').innerHTML = `${points} poäng`;
                 break;
         }
     }

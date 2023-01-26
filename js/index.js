@@ -18,11 +18,30 @@ let randomWord = words[Math.floor(Math.random() * words.length)];
 
 let guessedLetters = [];
 let nrOfTries = 5;
-let userTries = 0;
 let keypressed;
 
-//lägger upp tomma rutor
+
+const winViewH1 = document.querySelector('section h1');
+const winViewText = document.querySelector('section p');
 const wordEl = document.querySelector('.word');
+
+
+//nollställning
+function reset() {
+    letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+        'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+    guessedLetters = [];
+    document.querySelector('figure').classList.remove('scaffold');
+    document.querySelector('figure').classList.remove('head');
+    document.querySelector('figure').classList.remove('body');
+    document.querySelector('figure').classList.remove('arms');
+    document.querySelector('figure').classList.remove('legs');
+    document.querySelector('.nomatch').innerHTML = '';
+    nrOfTries = 5;
+    randomWord = words[Math.floor(Math.random() * words.length)];
+}
+
+//lägger upp tomma rutor
 function setWordBoxes() {
     wordEl.innerHTML = '';
     for (let i = 0; i < randomWord.length; i++) {
@@ -37,17 +56,7 @@ const lowDiff = document.querySelector('.short');
 const highDiff = document.querySelector('.long');
 
 lowDiff.addEventListener('click', function () {
-    letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
-        'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-    guessedLetters = [];
-    document.querySelector('figure').classList.remove('scaffold');
-    document.querySelector('figure').classList.remove('head');
-    document.querySelector('figure').classList.remove('body');
-    document.querySelector('figure').classList.remove('arms');
-    document.querySelector('figure').classList.remove('legs');
-    document.querySelector('.nomatch').innerHTML = '';
-    nrOfTries = 5;
-    userTries = 0;
+    reset();
     while (randomWord.length > 4) {
         randomWord = words[Math.floor(Math.random() * words.length)];
         setWordBoxes();
@@ -55,17 +64,7 @@ lowDiff.addEventListener('click', function () {
 })
 
 highDiff.addEventListener('click', function () {
-    letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
-        'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-    guessedLetters = [];
-    document.querySelector('figure').classList.remove('scaffold');
-    document.querySelector('figure').classList.remove('head');
-    document.querySelector('figure').classList.remove('body');
-    document.querySelector('figure').classList.remove('arms');
-    document.querySelector('figure').classList.remove('legs');
-    document.querySelector('.nomatch').innerHTML = '';
-    nrOfTries = 5;
-    userTries = 0;
+    reset();
     while (randomWord.length < 5) {
         randomWord = words[Math.floor(Math.random() * words.length)];
         setWordBoxes();
@@ -79,8 +78,6 @@ function combineLetters() {
         comparedWord += listItems[i].innerHTML;
     }
     if (comparedWord == randomWord) {
-        let winViewH1 = document.querySelector('section h1');
-        let winViewText = document.querySelector('section p');
         winViewH1.innerHTML = 'You Won!';
         winViewText.innerHTML = '';
         document.querySelector('.game-over').classList.add('show');
@@ -89,7 +86,11 @@ function combineLetters() {
 
 let restartBtn = document.querySelector('a');
 restartBtn.addEventListener('click', () => {
-    location.reload();
+    reset();
+    document.querySelector('.game-over').classList.remove('show');
+    wordEl.innerHTML = '';
+    randomWord = words[Math.floor(Math.random() * words.length)];
+    setWordBoxes();
 });
 
 document.onkeydown = function (e) {
@@ -130,7 +131,8 @@ document.onkeydown = function (e) {
             case 0:
                 document.querySelector('figure').classList.add('legs');
                 document.querySelector('.game-over').classList.add('show');
-                document.querySelector('b').innerHTML = randomWord;
+                winViewH1.innerHTML = 'Game over!';
+                winViewText.innerHTML = `The word we were looking for was <b>${randomWord}</b>.`;
                 break;
         }
     }

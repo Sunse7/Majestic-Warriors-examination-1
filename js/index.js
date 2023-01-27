@@ -25,6 +25,8 @@ let points = 0
 const winViewH1 = document.querySelector('section h1');
 const winViewText = document.querySelector('section p');
 const wordEl = document.querySelector('.word');
+const lowDiff = document.querySelector('.short');
+const highDiff = document.querySelector('.long');
 
 
 //nollställning
@@ -51,9 +53,7 @@ function setWordBoxes() {
 }
 setWordBoxes()
 
-//valbar svårighetsgrad
-const lowDiff = document.querySelector('.short');
-const highDiff = document.querySelector('.long');
+//valbar ordlängd
 
 lowDiff.addEventListener('click', function () {
     reset();
@@ -71,6 +71,7 @@ highDiff.addEventListener('click', function () {
     }
 })
 
+//vinstfunktion
 function combineLetters() {
     let listItems = document.querySelectorAll('.word li');
     let comparedWord = '';
@@ -82,10 +83,11 @@ function combineLetters() {
         winViewText.innerHTML = '';
         document.querySelector('.game-over').classList.add('show');
         points+=100;
-        document.querySelector('aside p:first-child').innerHTML = `${points} poäng`;
+        document.querySelector('aside p:first-child').innerHTML = `${points} points`;
     }
 }
 
+//starta om-knappen
 let restartBtn = document.querySelector('a');
 restartBtn.addEventListener('click', () => {
     reset();
@@ -95,9 +97,11 @@ restartBtn.addEventListener('click', () => {
     setWordBoxes();
 });
 
+//gissning
 document.onkeydown = function (e) {
     keypressed = e.key;
 
+    //rätt gissning
     if (randomWord.includes(keypressed)) {
         letters.splice(letters.indexOf(keypressed), 1);
 
@@ -109,6 +113,8 @@ document.onkeydown = function (e) {
             }
         }
     }
+
+    //fel gissning
     else if (!randomWord.includes(keypressed) && letters.includes(keypressed)) {
         nrOfTries--;
         guessedLetters.unshift(keypressed);
@@ -120,6 +126,7 @@ document.onkeydown = function (e) {
         document.querySelector('.nomatch').appendChild(noMatchWord);
         document.querySelector('figure').classList.add('scaffold');
 
+        //ritar upp gubben och ger game-over
         switch (nrOfTries) {
             case 3:
                 document.querySelector('figure').classList.add('head');
@@ -136,7 +143,7 @@ document.onkeydown = function (e) {
                 winViewH1.innerHTML = 'Game over!';
                 winViewText.innerHTML = `The word we were looking for was <b>${randomWord}</b>.`;
                 points = 0;
-                document.querySelector('aside p:first-child').innerHTML = `${points} poäng`;
+                document.querySelector('aside p:first-child').innerHTML = `${points} points`;
                 break;
         }
     }
